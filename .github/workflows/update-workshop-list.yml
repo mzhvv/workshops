@@ -1,4 +1,4 @@
-name: update-workshop-lists
+name: update-workshop-list
 
 on:
   schedule:
