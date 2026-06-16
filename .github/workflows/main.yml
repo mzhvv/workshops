@@ -1,4 +1,4 @@
-name: Update Workshop Index
+name: update-workshop-lists
 
 on:
   schedule:
@@ -20,16 +20,17 @@ jobs:
           curl -H "Accept: application/vnd.github.v3+json" \
                "https://api.github.com/users/mzhvv/repos?per_page=100" > repos.json
           
-          # Фильтруем те, у которых есть topic "mzhvv-workshop"
+          # Генерируем README.md с проверкой, что репозиторий принадлежит mzhvv
           echo "# 🛠️ Мой Workshop-индекс" > README.md
           echo "" >> README.md
-          echo "Автоматически обновляемый список всех репозиториев с темой \`mzhvv-workshop\`." >> README.md
+          echo "Автоматически обновляемый список всех репозиториев с темой \`mzhvv-workshop\`, созданных [mzhvv](https://github.com/mzhvv)." >> README.md
           echo "" >> README.md
           echo "| Репозиторий | Описание | Язык | Обновлён |" >> README.md
           echo "|-------------|----------|------|----------|" >> README.md
           
-          jq -r '.[] | select(.topics != null and (.topics | contains(["mzhvv-workshop"]))) | "| [\(.name)](\(.html_url)) | \(.description // "—") | \(.language // "—") | \(.updated_at[0:10]) |"' repos.json >> README.md
-          
+          # Фильтруем по владельцу и теме (для надёжности)
+          jq -r '.[] | select(.owner.login == "mzhvv" and .topics != null and (.topics | contains(["mzhvv-workshop"]))) | "| [\(.name)](\(.html_url)) | \(.description // "—") | \(.language // "—") | \(.updated_at[0:10]) |"' repos.json >> README.md 
+      
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
