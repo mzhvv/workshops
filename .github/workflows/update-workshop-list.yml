@@ -26,18 +26,16 @@ jobs:
           echo "hands-on growth 🎯" >> README.md
           echo "" >> README.md
 
-          # 1
-          echo "## workshop list:" >> README.md
-          echo "| repositories | homepage |" >> README.md
-          echo "| ------------ | -------- |" >> README.md
+          #
           jq -r '.[] 
-            | (
-              select(.owner.login == "mzhvv" and .topics != null
-            ) and (
-              .topics | contains(["mzhvv-workshop"])) and .name != "workshop"
-             ) 
+            | select(
+                .owner.login == "mzhvv" and
+                .topics != null and
+                (.topics | contains(["mzhvv-workshop"])) and
+                .name != "workshop"
+              )
             | "| [\(.name)](\(.html_url)) | \(.homepage // "" | if . == "" then "—" else . end) |"' repos.json >> README.md
-      
+
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
