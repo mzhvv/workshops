@@ -27,7 +27,7 @@ jobs:
           echo "# workshop" > README.md
           echo "" >> README.md
           echo "## workshop list:" >> README.md
-          echo "auto-update workshop list"
+          echo "auto-update workshop list" >> README.md
           echo "| Репозиторий | Описание | Язык | Обновлён |" >> README.md
           echo "|-------------|----------|------|----------|" >> README.md
           
