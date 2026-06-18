@@ -34,14 +34,15 @@ jobs:
           
           #
           jq -r '.[] 
-            | select(
-                (.owner.login == "mzhvv" and .topics != null) and
-                (.topics | contains(["mzhvv-workshop"])) and
-                .name != "workshop"
-              )
-            | "| [\(.name)](\(.html_url)) 
-            | \(.homepage // "—") 
-            |"' repos.json >> README.md
+          
+          | select(
+              (.owner.login == "mzhvv" and .topics != null) and
+              (.topics | contains(["mzhvv-workshop"])) and
+              .name != "workshop"
+            )
+          | "| [\(.name)](\(.html_url)) 
+          | \(.homepage // "—") 
+          |"' repos.json >> README.md
       
       - name: Commit and push if changed
         run: |
