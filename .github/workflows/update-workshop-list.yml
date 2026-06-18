@@ -24,11 +24,8 @@ jobs:
             "https://api.github.com/users/mzhvv/repos?per_page=100" > repos.json
           
           #
-          echo "# workshop" > README.md
-          echo "hands-on growth 🎯" >> README.md
-          echo "" >> README.md
-          echo "## workshop list:" >> README.md
-          echo "auto-update workshop list!" >> README.md
+          echo "# workshop list:" >> README.md
+          echo "*auto-update workshop list!*" >> README.md
           echo "| repositories | website |" >> README.md
           echo "|--------------|---------|" >> README.md
           
