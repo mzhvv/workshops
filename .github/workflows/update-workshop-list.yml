@@ -41,6 +41,7 @@ jobs:
               .name != "workshop"
             )
           | "| [\(.name)](\(.html_url)) | \(.homepage // "—") |"'
+          
           repos.json >> README.md
       
       - name: Commit and push if changed
