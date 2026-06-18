@@ -27,7 +27,7 @@ jobs:
           echo "# workshop" > README.md
           echo "hands-on growth 🎯" >> README.md
           echo "" >> README.md
-          echo "## workshop list:" > README.md
+          echo "## workshop list:" >> README.md
           echo "*auto-update workshop list!*" >> README.md
           echo "| repositories | website |" >> README.md
           echo "|--------------|---------|" >> README.md
