@@ -42,6 +42,23 @@ jobs:
             | "| [\(.name)](\(.html_url))     
             | \(.homepage // "???")
             |"' repos.json >> README.md
+
+                      echo "## workshop list:" >> README.md
+          echo "| Репозиторий | Описание | Язык | Обновлён |" >> README.md
+          echo "|-------------|----------|------|----------|" >> README.md
+          
+          #
+          jq -r '.[] 
+            | select(
+                (.owner.login == "mzhvv" and .topics != null) and
+                (.topics | contains(["mzhvv-workshop"])) and
+                .name != "workshops"
+              )
+            | "| [\(.name)](\(.html_url)) 
+            | \(.description // "—") 
+            | \(.language // "—") 
+            | \(.updated_at[0:10]) 
+            |"' repos.json >> README.md
       
       - name: Commit and push if changed
         run: |
